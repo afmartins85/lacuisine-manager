@@ -1,0 +1,29 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="logo.png">images/logo.png</file>
+        <file alias="tipografia_logo.png">images/tipografia_logo.png</file>
+        <file alias="restaurant_logo.png">images/restaurant_logo.png</file>
+        <file alias="foto_produtos_menu.png">images/foto_produtos_menu.png</file>
+        <file alias="scrollbar_bg.png">images/scrollbar_bg.png</file>
+        <file alias="scrollbar_indicator.png">images/scrollbar_indicator.png</file>
+        <file alias="scrollbar_seta_baixo.png">images/scrollbar_seta_baixo.png</file>
+        <file alias="scrollbar_seta_cima.png">images/scrollbar_seta_cima.png</file>
+        <file alias="menu.png">icons/lacuisine/20x20/menu.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>qml/lacuisine.qml</file>
+        <file>qml/components/lacuisine/controls/GeneralButton.qml</file>
+        <file>qml/components/lacuisine/responsive/theme/AppTheme.qml</file>
+        <file>qml/components/lacuisine/controls/qmldir</file>
+        <file>qml/components/lacuisine/responsive/theme/qmldir</file>
+        <file>qml/components/lacuisine/controls/TopReturnButton.qml</file>
+        <file>qml/components/lacuisine/controls/CategoryDelegate.qml</file>
+        <file>qml/components/lacuisine/controls/ItemDelegate.qml</file>
+        <file>qml/components/lacuisine/controls/DrawerButton.qml</file>
+        <file>qml/components/lacuisine/controls/DrawerComponent.qml</file>
+        <file>qml/components/lacuisine/controls/ScrollBar.qml</file>
+        <file>qml/pages/Profile.qml</file>
+        <file>qml/pages/ProfileForm.ui.qml</file>
+        <file>qml/pages/SysInfoScreen.qml</file>
+    </qresource>
+</RCC>

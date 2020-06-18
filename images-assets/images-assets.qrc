@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/images-assets">
+        <file>button-background@2x.1.png</file>
+    </qresource>
+</RCC>

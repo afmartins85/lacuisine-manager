@@ -1,0 +1,9 @@
+
+module lacuisine.controls
+GeneralButton 1.0 GeneralButton.qml
+TopReturnButton 1.0 TopReturnButton.qml
+CategoryDelegate 1.0 CategoryDelegate.qml
+ItemDelegate 1.0 ItemDelegate.qml
+DrawerButton 1.0 DrawerButton.qml
+DrawerComponent 1.0 DrawerComponent.qml
+ScrollBar 1.0 ScrollBar.qml
