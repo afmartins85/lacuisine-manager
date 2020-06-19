@@ -9,12 +9,18 @@ include(src/src.pri)
 include(src/paystation/paystation.pri)
 include(src/gsoap/gsoap.pri)
 
-#qml.files = $$files(*.qml)
-#qml.files += $$files(pages/*.qml)
-#qml.files += $$files(components/lacuisine/responsive/theme/*.qml)
-#qml.files += $$files(components/lacuisine/controls/*.qml)
-#qml.prefix = /pages
-#RESOURCES += qml
+DEFINES += WITH_OPENSSL
+
+LIBS += -lssl -lcrypto -ldl
+
+qml.files = $$files(qml/*.qml)
+qml.files += $$files(qml/pages/*.qml)
+qml.files += $$files(qml/components/lacuisine/responsive/theme/*.qml)
+qml.files += $$files(qml/components/lacuisine/responsive/theme/qmldir)
+qml.files += $$files(qml/components/lacuisine/controls/*.qml)
+qml.files += $$files(qml/components/lacuisine/controls/qmldir)
+qml.prefix = /
+RESOURCES += qml
 
 #images.files = $$files(images/*.png)
 #images.files += $$files(images-assets/*.png)
@@ -30,11 +36,17 @@ RESOURCES += \
     images-assets/images-assets.qrc \
     lacuisine_manager.qrc \
     qtquickcontrols2.conf
-#    components/lacuisine/responsive/theme/qmldir \
-#    components/lacuisine/controls/qmldir
 
+OTHER_FILES += \
+    src/gsoap/generate/common.xsd \
+    src/gsoap/generate/lacuisine.wsdl \
+    src/gsoap/generate/service.wsdl
 
 QML_IMPORT_PATH += $$PWD/qml/components
 
 target.path = /home/pi/lacuisine_manager
 INSTALLS += target
+
+DISTFILES += \
+    qml/pages/Login.qml \
+    qml/pages/LoginForm.ui.qml

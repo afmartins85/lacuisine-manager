@@ -69,7 +69,12 @@ QtObject
     readonly property int textSizeVerySmall: tscale(24)
     readonly property int textSizeExtraSmall: tscale(18)
     readonly property int textSizeUltraSmall: tscale(10)
+    readonly property int textSize_8: tscale(8)
+    readonly property int textSize_10: tscale(10)
     readonly property int textSize_12: tscale(12)
+    readonly property int textSize_18: tscale(18)
+    readonly property int textSize_24: tscale(24)
+    readonly property int textSize_32: tscale(32)
 
     readonly property color textColorNormal: "#ffec8b" // lightgoldenrod 1
     readonly property color textColorSmall: "#cdbe70" // lightgoldenrod 3
@@ -131,6 +136,10 @@ QtObject
     // Total Cost
     readonly property real squareCostWidth: hscale(100)
     readonly property real squareCostHeight: vscale(58)
+
+    // Left Tool Bar
+    readonly property real leftToolBarWidth: hscale(140)
+    readonly property real leftToolBarHeight: vscale(90)
 
     readonly property int columnSpacing_2: tscale(2)
     readonly property int columnSpacing_3: tscale(3)

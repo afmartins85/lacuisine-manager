@@ -10,20 +10,4 @@
         <file alias="scrollbar_seta_cima.png">images/scrollbar_seta_cima.png</file>
         <file alias="menu.png">icons/lacuisine/20x20/menu.png</file>
     </qresource>
-    <qresource prefix="/">
-        <file>qml/lacuisine.qml</file>
-        <file>qml/components/lacuisine/controls/GeneralButton.qml</file>
-        <file>qml/components/lacuisine/responsive/theme/AppTheme.qml</file>
-        <file>qml/components/lacuisine/controls/qmldir</file>
-        <file>qml/components/lacuisine/responsive/theme/qmldir</file>
-        <file>qml/components/lacuisine/controls/TopReturnButton.qml</file>
-        <file>qml/components/lacuisine/controls/CategoryDelegate.qml</file>
-        <file>qml/components/lacuisine/controls/ItemDelegate.qml</file>
-        <file>qml/components/lacuisine/controls/DrawerButton.qml</file>
-        <file>qml/components/lacuisine/controls/DrawerComponent.qml</file>
-        <file>qml/components/lacuisine/controls/ScrollBar.qml</file>
-        <file>qml/pages/Profile.qml</file>
-        <file>qml/pages/ProfileForm.ui.qml</file>
-        <file>qml/pages/SysInfoScreen.qml</file>
-    </qresource>
 </RCC>

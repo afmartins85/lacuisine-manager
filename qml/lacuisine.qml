@@ -2,9 +2,7 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Material 2.12
-import QtQuick.Controls.Universal 2.12
 import Qt.labs.settings 1.0
-import Qt.labs.platform 1.0
 import lacuisine.controls 1.0
 import lacuisine.responsive.theme 1.0
 import LaCuisine 1.0
@@ -32,12 +30,16 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        sysInfoScreen.open();
+        loginScreen.open();
     }
 
     Shortcut {
         sequence: "Ctrl+Q"
         onActivated: Qt.quit()
+    }
+
+    Login {
+        id: loginScreen
     }
 
     SysInfoScreen {
@@ -69,23 +71,30 @@ ApplicationWindow {
     header: ToolBar {
 
         width: parent.width
-        height: AppTheme.toolBarHeight
-
-        Rectangle {
-            anchors.fill: parent
-            color: "#607d8b"
-        }
+        height: AppTheme.leftToolBarHeight
 
         RowLayout {
             anchors.fill: parent
             spacing: AppTheme.columnSpacing_20
 
             Label {
+                id: userLogin
+                text: "afmartins85"
+                elide: Label.ElideRight
+                verticalAlignment: Qt.AlignLeft
+                Layout.leftMargin: AppTheme.columnSpacing_20
+                font.family: robotoFont.name
+                font.pixelSize: AppTheme.textSize_12
+                color: "white"
+            }
+
+            Label {
                 id: dateTimeInfo
                 text: "Quarta-feira, 27/05/2020\n08:00"
                 elide: Label.ElideRight
+                horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
-                Layout.leftMargin: AppTheme.columnSpacing_20
+                Layout.fillWidth: true
                 font.family: robotoFont.name
                 font.pixelSize: AppTheme.textSize_12
                 color: "white"
@@ -112,7 +121,6 @@ ApplicationWindow {
                         text: "Sistema.."
                         onTriggered: {
                             sysInfoScreen.open();
-//                            sysInfoScreen.visible = true;
                         }
                     }
 
@@ -125,13 +133,13 @@ ApplicationWindow {
     }
 
     Rectangle {
-        width: AppTheme.toolBarButtonWidth
+        width: AppTheme.leftToolBarWidth
         height: parent.height
         anchors {
             left: parent.left
             verticalCenter: parent.verticalCenter
         }
-        color: "#607d8b"
+        color: "#263238"
     }
 
     RowLayout {
@@ -140,26 +148,27 @@ ApplicationWindow {
 
         ListView {
             id: menuList
-            width: AppTheme.toolBarButtonWidth
+            width: AppTheme.leftToolBarWidth
             Layout.fillHeight: true
             Layout.fillWidth: false
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
             orientation: ListView.Vertical
+            spacing: -10
             model: menuListModel
             delegate: GeneralButton {
-                implicitWidth: AppTheme.toolBarButtonWidth
-                implicitHeight: AppTheme.toolBarButtonHeight
-                color: "#263238"
-                colorText: "white"
-                fontPxSize: AppTheme.textSizeExtraSmall
+                implicitWidth: AppTheme.leftToolBarWidth
+                implicitHeight: AppTheme.leftToolBarHeight
+                color: "white"
+                colorText: "#263238"
+                fontPxSize: AppTheme.textSize
                 text: title
             }
         }
 
         StackView {
             id: stackView
-            Layout.fillHeight: true
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+            Layout.fillHeight: true
             Layout.fillWidth: true
             initialItem: Profile {}
         }

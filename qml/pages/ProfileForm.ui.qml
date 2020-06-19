@@ -11,6 +11,11 @@ Page {
     implicitWidth: parent.width
     implicitHeight: parent.height
 
+    background: Rectangle {
+        anchors.fill: parent
+        color: "#e2e2e2"
+    }
+
     property alias companyLogo: companyLogo
     property alias companyName: companyName
     property alias mouse: mouse
@@ -36,10 +41,14 @@ Page {
     }
 
     RowLayout {
-        Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+        anchors.fill: parent
+        Layout.fillWidth: true
 
         ColumnLayout {
             spacing: AppTheme.columnSpacing_30
+
+            Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+            Layout.fillWidth: true
 
             Item {
                 id: companyLogo
@@ -95,8 +104,16 @@ Page {
             TextField {
                 id: companyName
                 placeholderText: "Nome da empresa"
+
                 Layout.alignment: Qt.AlignLeft
                 Layout.margins: AppTheme.columnSpacing_30
+                Layout.fillWidth: true
+
+                background: Rectangle {
+                    color: "transparent"
+                    border.color: "transparent"
+                }
+
                 enabled: editMode ? true : false
                 hoverEnabled: true
                 font.pixelSize: AppTheme.textSizeSmall
@@ -113,7 +130,7 @@ Page {
             Button {
                 id: editButtom
                 background: Image {
-//                    source: "qrc:/images/edit_profile.png"
+                    //                    source: "qrc:/images/edit_profile.png"
                     sourceSize: Qt.size(AppTheme.mallRestaurantLogoWidth / 2,
                                         AppTheme.smallRestaurantLogoHeight / 2)
                     fillMode: Image.PreserveAspectFit
@@ -126,7 +143,7 @@ Page {
                 Button {
                     id: editCancelButtom
                     background: Image {
-//                        source: "qrc:/images/edit_cancel.png"
+                        //                        source: "qrc:/images/edit_cancel.png"
                         sourceSize: Qt.size(
                                         AppTheme.mallRestaurantLogoWidth / 1.15,
                                         AppTheme.smallRestaurantLogoHeight / 1.15)
@@ -137,7 +154,7 @@ Page {
                 Button {
                     id: editAcceptButtom
                     background: Image {
-//                        source: "qrc:/images/edit_accept.png"
+                        //                        source: "qrc:/images/edit_accept.png"
                         sourceSize: Qt.size(AppTheme.mallRestaurantLogoWidth,
                                             AppTheme.smallRestaurantLogoHeight)
                         fillMode: Image.PreserveAspectFit
