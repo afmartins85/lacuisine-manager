@@ -1,68 +1,49 @@
 #include "authentication.h"
+#include "loguru.hpp"
+#include "simplecrypt.h"
 #include <QCryptographicHash>
 #include <QDebug>
-
+#include <QString>
 /**
  * @brief Authentication::Authentication
  * @param parent
  */
-Authentication::Authentication(QQuickItem *parent) : QQuickItem(parent)
-{
-    qDebug("Authentication CONSTRUCTOR");
-}
+Authentication::Authentication(QQuickItem *parent) : QQuickItem(parent) { LOG_F(INFO, "Authentication CONSTRUCTOR"); }
 
 /**
  * @brief Authentication::~Authentication
  */
-Authentication::~Authentication()
-{
-
-}
-
-/**
- * @brief Authentication::checkAccessRequest
- * @param login
- * @param password
- * @return
- */
-int Authentication::checkAccessRequest(QString login, QString password)
-{
-    QCryptographicHash md5(QCryptographicHash::Md5);
-    QByteArray result;
-    unsigned char p[17] = { 0x48, 0x46, 0x26, 0xF4, 0xC4, 0xD1, 0xBE, 0x5C,
-                            0x12, 0x48, 0x8F, 0x86, 0x93, 0xB3, 0x3D, 0x8A};
-
-    result = md5.hash(password.toLatin1(), QCryptographicHash::Md5);
-    qDebug() << "MD5SUM: " << result.toHex();
-
-    if ((!login.compare(login, "Acesso")) && (!memcmp(result.constData(), p, 16))) {
-        setLogin(login);
-        return 0;
-    }
-    return -1;
-}
+Authentication::~Authentication() {}
 
 /**
  * @brief Authentication::genMD5
  * @param passwd
  * @return
  */
-QByteArray Authentication::genMD5(QString passwd)
-{
-    QCryptographicHash md5(QCryptographicHash::Md5);
-    QByteArray result;
+QByteArray Authentication::genMD5(QString passwd) {
+  QCryptographicHash md5(QCryptographicHash::Md5);
+  QByteArray result;
 
-    result = md5.hash(passwd.toLatin1(), QCryptographicHash::Md5);
-    qDebug() << "MD5SUM: " << result.toHex();
-
-    return result;
+  result = md5.hash(passwd.toLatin1(), QCryptographicHash::Md5);
+  return result.toBase64(QByteArray::OmitTrailingEquals);
 }
 
 /**
- * @brief Authentication::getUserName
+ * @brief Authentication::md5ToString
+ * @param array
  * @return
  */
-QString Authentication::getUserName()
-{
-    return login();
+QString Authentication::md5ToString(const QByteArray &array) { return QString::fromUtf8(array); }
+
+/**
+ * @brief Authentication::genCipher
+ * @param data
+ * @param k
+ * @return
+ */
+QString Authentication::genCipher(const QString &data, int k) {
+  // Generate a cypher with Sha256 to machine unique Id
+  QByteArray cypher = QCryptographicHash::hash(data.toLatin1(), QCryptographicHash::Sha256);
+  SimpleCrypt crypto(k);
+  return crypto.encryptToString(cypher);
 }

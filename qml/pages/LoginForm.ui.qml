@@ -22,6 +22,7 @@ Popup {
     property alias userName: userName
     property alias passwd: passwd
     property alias submmit: submmit
+    property alias loginError: loginError
     property bool loginErrorFlag: false
 
     Material.foreground: "white"
@@ -74,12 +75,14 @@ Popup {
 
         TextField {
             id: userName
+            hoverEnabled: true
             Layout.fillWidth: true
             font.pixelSize: AppTheme.textSize_24
         }
 
         TextField {
             id: passwd
+            hoverEnabled: true
             Layout.fillWidth: true
             echoMode: TextInput.Password
             font.pixelSize: AppTheme.textSize_32

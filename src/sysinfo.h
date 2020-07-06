@@ -19,6 +19,7 @@ class SysInfo : public QObject {
 
  public:
   explicit SysInfo(QObject *parent = nullptr);
+  SysInfo(const SysInfo &sysInfo);
   //! Returns the full architecture string that Qt was compiled for.
   QString buildAbi() const { return m_buildAbi; }
   //! Returns the architecture of the CPU that the application is running on, in text format.
@@ -38,6 +39,12 @@ class SysInfo : public QObject {
   QString productVersion() const { return m_productVersion; }
   //! Returns a unique ID for this machine, if one can be determined.
   QString uniqueID() const { return m_uniqueID; }
+  //! Operator overloading to compare two SysInfo classes
+  bool operator==(const SysInfo &sysInfo);
+  //! Operator overload to assign the value of sysInfo on this object
+  SysInfo &operator=(const SysInfo &sysInfo);
+  //! Return the object itself
+  Q_INVOKABLE SysInfo &objectItSelf(void);
 
  public slots:
   //!

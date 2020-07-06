@@ -1,5 +1,13 @@
 
-#include "soapLacuisineBindingService.h"
 #include "LacuisineBinding.nsmap"
+#include "soapLacuisineBindingService.h"
 
-int LacuisineBindingService::AccessAuthentication(ns1__AccessAuthenticationRequestType */*ns1__AccessAuthenticationRequest*/, ns1__AccessAuthenticationResponseType &/*ns1__AccessAuthenticationResponse*/) {return SOAP_OK;}
+int LacuisineBindingService::OpenUserSession(ns1__DataUserSessionType* /*ns1__DataUserSessionRequest*/,
+                                             ns1__OpenUserSessionResponseType& /*ns1__OpenUserSessionResponse*/) {
+  return SOAP_OK;
+};
+
+int LacuisineBindingService::CloseUserSession(ns1__DataUserSessionType* /*ns1__DataUserSessionRequest*/,
+                                              ns1__CloseUserSessionResponseType& /*ns1__CloseUserSessionResponse*/) {
+  return SOAP_OK;
+}

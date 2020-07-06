@@ -39,8 +39,11 @@
 ****************************************************************************/
 
 #include "gsoap/soapLacuisineBindingProxy.h"
+#include "loguru.hpp"
 #include "paystation/paystation.h"
+#include "soapclient.h"
 #include "sysinfo.h"
+#include "unixsignalhandle.h"
 #include <QGuiApplication>
 #include <QQmlComponent>
 #include <QQmlContext>
@@ -58,8 +61,13 @@ int main(int argc, char *argv[]) {
 
   QGuiApplication app(argc, argv);
 
+  // Starting the log supervisor
+  loguru::init(argc, argv);
+
   qmlRegisterType<PayStation>("LaCuisine", 1, 0, "PayStation");
   qmlRegisterType<SysInfo>("LaCuisine", 1, 0, "SysInfo");
+  qmlRegisterType<SoapClient>("LaCuisine", 1, 0, "SoapClient");
+  qmlRegisterType<UnixSignalHandle>("LaCuisine", 1, 0, "UnixSignalHandle");
 
   QIcon::setThemeName("lacuisine");
 
@@ -87,5 +95,6 @@ int main(int argc, char *argv[]) {
   engine.addImportPath(":/qml/components");
   engine.addImportPath(":/qml/pages");
   engine.load(QUrl(QStringLiteral("qrc:/qml/lacuisine.qml")));
+
   return app.exec();
 }

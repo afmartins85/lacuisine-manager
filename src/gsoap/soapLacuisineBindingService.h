@@ -95,7 +95,10 @@ A commercial use license is available from Genivia Inc., contact@genivia.com
         // Service operations are listed below: you should define these
         // Note: compile with -DWITH_PURE_VIRTUAL to declare pure virtual methods
         //
-        /// Web service operation 'AccessAuthentication' implementation, should return SOAP_OK or error code
-        virtual int AccessAuthentication(ns1__AccessAuthenticationRequestType *ns1__AccessAuthenticationRequest, ns1__AccessAuthenticationResponseType &ns1__AccessAuthenticationResponse) SOAP_PURE_VIRTUAL;
+        /// Web service operation 'OpenUserSession' implementation, should return SOAP_OK or error code
+        virtual int OpenUserSession(ns1__DataUserSessionType *ns1__DataUserSessionRequest, ns1__OpenUserSessionResponseType &ns1__OpenUserSessionResponse) SOAP_PURE_VIRTUAL;
+        //
+        /// Web service operation 'CloseUserSession' implementation, should return SOAP_OK or error code
+        virtual int CloseUserSession(ns1__DataUserSessionType *ns1__DataUserSessionRequest, ns1__CloseUserSessionResponseType &ns1__CloseUserSessionResponse) SOAP_PURE_VIRTUAL;
     };
 #endif

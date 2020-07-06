@@ -1,7 +1,9 @@
 #include "sysinfo.h"
+#include "loguru.hpp"
 #include "simplecrypt.h"
 #include <QCryptographicHash>
 #include <QDebug>
+#include <QString>
 
 SysInfo::SysInfo(QObject *parent) : QObject(parent) {
   QSysInfo info;
@@ -22,6 +24,18 @@ SysInfo::SysInfo(QObject *parent) : QObject(parent) {
   //  qDebug() << uniqueID;
 
   this->setUniqueID(QString::fromUtf8(info.machineUniqueId()));
+}
+
+SysInfo::SysInfo(const SysInfo &sysInfo) {
+  this->setBuildAbi(sysInfo.buildAbi());
+  this->setCpuArch(sysInfo.cpuArch());
+  this->setKernelType(sysInfo.kernelType());
+  this->setKernelVersion(sysInfo.kernelVersion());
+  this->setHostName(sysInfo.hostName());
+  this->setProductName(sysInfo.productName());
+  this->setProductType(sysInfo.productType());
+  this->setProductVersion(sysInfo.productVersion());
+  this->setUniqueID(sysInfo.uniqueID());
 }
 
 /**
@@ -122,3 +136,41 @@ void SysInfo::setUniqueID(QString uniqueID) {
   m_uniqueID = uniqueID;
   emit uniqueIDChanged(m_uniqueID);
 }
+
+/**
+ * @brief SysInfo::operator ==
+ * @param sysInfo
+ * @return
+ */
+bool SysInfo::operator==(const SysInfo &sysInfo) {
+  if (this->m_uniqueID.compare(sysInfo.uniqueID())) {
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * @brief SysInfo::operator =
+ * @param sysInfo
+ * @return
+ */
+SysInfo &SysInfo::operator=(const SysInfo &sysInfo) {
+  this->setBuildAbi(sysInfo.buildAbi());
+  this->setCpuArch(sysInfo.cpuArch());
+  this->setKernelType(sysInfo.kernelType());
+  this->setKernelVersion(sysInfo.kernelVersion());
+  this->setHostName(sysInfo.hostName());
+  this->setProductName(sysInfo.productName());
+  this->setProductType(sysInfo.productType());
+  this->setProductVersion(sysInfo.productVersion());
+  this->setUniqueID(sysInfo.uniqueID());
+
+  return *this;
+}
+
+/**
+ * @brief SysInfo::objectItSelf
+ * @return
+ */
+SysInfo &SysInfo::objectItSelf() { return *this; }

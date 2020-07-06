@@ -23,6 +23,7 @@ ApplicationWindow {
     readonly property var robotoFont: roboto
 
     property alias stackView: stackView
+    property alias soapClient: soapClient
 
     Settings {
         id: settings
@@ -31,11 +32,28 @@ ApplicationWindow {
 
     Component.onCompleted: {
         loginScreen.open();
+        soapClient.setSysInfo(sysInfoScreen.sysInfo);
     }
 
+//    UnixSignalHandle {
+//        id: sigHandle
+//        onSigTrigged: {
+//            console.log("UnixSignalHandle: " + sig)
+//            Qt.quit();
+//        }
+//    }
+
     Shortcut {
+        id: shortcut
         sequence: "Ctrl+Q"
         onActivated: Qt.quit()
+    }
+
+    SoapClient {
+        id: soapClient
+        onSessionOpened: {
+            userLogin.text = userName;
+        }
     }
 
     Login {
@@ -48,24 +66,24 @@ ApplicationWindow {
 
     ListModel {
         id: menuListModel
-        ListElement {
-            title: "Profile"
-        }
-        ListElement {
-            title: "Pedidos"
-        }
-        ListElement {
-            title: "Mesas"
-        }
-        ListElement {
-            title: "Pessoal"
-        }
-        ListElement {
-            title: "Caixa"
-        }
-        ListElement {
-            title: "Cardápio"
-        }
+//        ListElement {
+//            title: "Profile"
+//        }
+//        ListElement {
+//            title: "Pedidos"
+//        }
+//        ListElement {
+//            title: "Mesas"
+//        }
+//        ListElement {
+//            title: "Pessoal"
+//        }
+//        ListElement {
+//            title: "Caixa"
+//        }
+//        ListElement {
+//            title: "Cardápio"
+//        }
     }
 
     header: ToolBar {
@@ -79,7 +97,7 @@ ApplicationWindow {
 
             Label {
                 id: userLogin
-                text: "afmartins85"
+                text: ""
                 elide: Label.ElideRight
                 verticalAlignment: Qt.AlignLeft
                 Layout.leftMargin: AppTheme.columnSpacing_20
@@ -170,7 +188,7 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignLeft | Qt.AlignTop
             Layout.fillHeight: true
             Layout.fillWidth: true
-            initialItem: Profile {}
+//            initialItem: Profile {}
         }
     }
 }

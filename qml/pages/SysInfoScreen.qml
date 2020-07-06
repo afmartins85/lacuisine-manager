@@ -22,6 +22,7 @@ Dialog {
 
     Material.foreground: "white"
 
+    property alias sysInfo: sysInfo
     SysInfo {
         id: sysInfo
     }
