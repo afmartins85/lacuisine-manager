@@ -2,19 +2,18 @@
 #define UNIXSIGNALHANDLE_H
 
 #include <QMap>
-#include <QThread>
+#include <QObject>
 #include <initializer_list>
 #include <signal.h>
 #include <unistd.h>
 
-class UnixSignalHandle : public QThread {
+class UnixSignalHandle : public QObject {
   Q_OBJECT
 
   Q_PROPERTY(int sig READ sig NOTIFY sigTrigged)
  public:
   explicit UnixSignalHandle(QObject *parent = nullptr);
 
-  void run() override;
   //!
   Q_INVOKABLE void catchUnixSignals(std::initializer_list<int> quitSignals);
   //!
@@ -22,7 +21,6 @@ class UnixSignalHandle : public QThread {
   //!
   int sig() const { return m_sig; }
 
-  void trigger(int sig);
  signals:
   void sigTrigged(int sig);
 
