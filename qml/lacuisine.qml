@@ -48,7 +48,6 @@ ApplicationWindow {
         sequence: "Ctrl+Q"
         onActivated: Qt.quit()
     }
-
     SoapClient {
         id: soapClient
         onSessionOpened: {
@@ -59,6 +58,7 @@ ApplicationWindow {
     Login {
         id: loginScreen
     }
+
 
     SysInfoScreen {
         id: sysInfoScreen
@@ -143,7 +143,14 @@ ApplicationWindow {
                     }
 
                     MenuItem {
-                        text: "Sobre"
+                        text: "Sobre.."
+                    }
+                    MenuItem {
+                        text: "LogOut"
+                        onTriggered: {
+                            soapClient.closeUserSession();
+                            loginScreen.open();
+                        }
                     }
                 }
             }
