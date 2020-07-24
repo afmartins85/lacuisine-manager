@@ -11,4 +11,11 @@ HEADERS += \
     $$PWD/soapLacuisineBindingService.h \
     $$PWD/soapLacuisineBindingProxy.h
 
+DEFINES += WITH_OPENSSL
+
+macos:INCLUDEPATH += /usr/local/opt/openssl/include
+macos:LIBS += "-L/usr/local/opt/openssl/lib"
+
+#unix:!macosx: LIBS += -lssl -lcrypto -ldl
+LIBS += -lssl -lcrypto -ldl
 #LIBS += -lgsoap++

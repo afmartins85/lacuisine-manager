@@ -9,10 +9,6 @@ include(src/src.pri)
 include(src/paystation/paystation.pri)
 include(src/gsoap/gsoap.pri)
 
-DEFINES += WITH_OPENSSL
-
-LIBS += -lssl -lcrypto -ldl
-
 qml.files = $$files(qml/*.qml)
 qml.files += $$files(qml/pages/*.qml)
 qml.files += $$files(qml/components/lacuisine/responsive/theme/*.qml)
