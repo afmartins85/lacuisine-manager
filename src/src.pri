@@ -10,6 +10,7 @@ SOURCES += \
 
 HEADERS += \
     $$PWD/authentication.h \
+    $$PWD/cacertdefinitions.h \
     $$PWD/loguru.hpp \
     $$PWD/session.h \
     $$PWD/simplecrypt.h \

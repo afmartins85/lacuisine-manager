@@ -1,16 +1,17 @@
 #include "soapclient.h"
 #include "authentication.h"
+#include "cacertdefinitions.h"
 #include "loguru.hpp"
 #include "qutilitytools.h"
 #include "simplecrypt.h"
 #include <QCryptographicHash>
+#include <QDebug>
 
 SoapClient::SoapClient(QObject *parent) : QObject(parent) {
   this->m_soapClient = new LacuisineBindingProxy("https://138.68.29.14:9090");
   soap_ssl_init();
-  if (soap_ssl_client_context(this->m_soapClient->soap, SOAP_SSL_DEFAULT,
-                              "/usr/local/share/ca-certificates/lacuisine/client.pem", "ZIWw3HND$yG6naizADpF",
-                              "/usr/local/share/ca-certificates/lacuisine/cacert.pem", NULL, NULL)) {
+
+  if (soap_ssl_client_context(this->m_soapClient->soap, SOAP_SSL_DEFAULT, clientPEM, passwd, cacert, NULL, NULL)) {
     LOG_F(ERROR, "SOAP Client Fail: %s", this->m_soapClient->soap_fault_string());
     exit(1);
   }
@@ -19,6 +20,7 @@ SoapClient::SoapClient(QObject *parent) : QObject(parent) {
 }
 
 SoapClient::~SoapClient() {
+  LOG_F(INFO, "SOAPClient DESTRUCTOR");
   this->closeUserSession();
   delete this->m_soapClient;
 }
@@ -52,7 +54,7 @@ bool SoapClient::openUserSession(QString login, QString password) {
   Authentication auth;
   QString passMD5 = auth.md5ToString(auth.genMD5(password));
 
-  ns1__DataUserSessionType request;
+  ns1__OpenUserSessionRequestType request;
   ns1__OpenUserSessionResponseType response;
 
   request.userName = login.toLatin1().data();
@@ -93,7 +95,7 @@ bool SoapClient::openUserSession(QString login, QString password) {
  * @return
  */
 bool SoapClient::closeUserSession() {
-  ns1__DataUserSessionType request;
+  ns1__CloseUserSessionRequestType request;
   ns1__CloseUserSessionResponseType response;
   QString eKey = Authentication::genCipher(this->getSessionPassword(), this->getSessionChallenge());
   QString uniqueID = Authentication::genCipher(m_sysInfo->uniqueID(), this->getSessionChallenge());
