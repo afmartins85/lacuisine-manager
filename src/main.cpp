@@ -79,16 +79,6 @@ int main(int argc, char *argv[]) {
     QQuickStyle::setStyle(settings.value("style").toString());
   }
 
-  LacuisineBindingProxy testProxy("https://138.68.29.14:9090");
-
-  soap_ssl_init();
-  if (soap_ssl_client_context(testProxy.soap, SOAP_SSL_DEFAULT, "/usr/local/share/ca-certificates/lacuisine/client.pem",
-                              "ZIWw3HND$yG6naizADpF", "/usr/local/share/ca-certificates/lacuisine/cacert.pem", NULL,
-                              NULL)) {
-    testProxy.soap_print_fault(stderr);
-    exit(1);
-  }
-
   QQmlApplicationEngine engine;
   engine.rootContext()->setContextProperty("availableStyles", QQuickStyle::availableStyles());
   engine.addImportPath(":/qml");
