@@ -95,9 +95,10 @@ bool SoapClient::openUserSession(QString login, QString password) {
  * @return
  */
 bool SoapClient::closeUserSession() {
+  Authentication auth;
   ns1__CloseUserSessionRequestType request;
   ns1__CloseUserSessionResponseType response;
-  QString eKey = Authentication::genCipher(this->getSessionPassword(), this->getSessionChallenge());
+  QString eKey = auth.md5ToString(auth.genMD5(this->getSessionPassword()));
   QString uniqueID = Authentication::genCipher(m_sysInfo->uniqueID(), this->getSessionChallenge());
 
   if (this->sessionUser().isEmpty() == true) {
